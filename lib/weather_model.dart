@@ -1,3 +1,6 @@
+// This model instantiates the cityName, temperature, humidity, cloudCover, windGust, UVIndex, and dewPoint variables
+// I can then use these variables in the main.dart file
+
 class WeatherModel {
   final String cityName;
   final double temperature;

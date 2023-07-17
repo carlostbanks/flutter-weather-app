@@ -4,6 +4,7 @@ import 'package:weather_application/weather_model.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:convert';
 
+// This function tells Flutter to run the App 
 void main() async {
   await dotenv.load(fileName: 'lib/.env');
   runApp(MyApp());
@@ -41,6 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
     _weatherData = _fetchWeatherData();
   }
 
+// This Futures is an async function that fetches a GET request from the API
+// I printed the API response to the console to troubleshoot 
   Future<WeatherModel> _fetchWeatherData() async {
     final response = await widget.apiService.fetchWeatherData();
     print('API Response: ${response.statusCode} ${response.body}');
@@ -56,6 +59,8 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+// This is a function that returns "Cloudy" if the cloudCover variable from the API is greater than 75
+// If it is less than 75, then it will return "Clear Skies"
   String getDescription(int cloudCover) {
     if (cloudCover > 75) {
       return 'Cloudy';
@@ -64,6 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+// This is where I use the Scaffold Widget to build the UI components of the app
+// I give it a title, I fetch the data from the FutureBuilder, and I begin centering and putting the data inside of columns using Text Widgets
+// I also add some styling using the TextStyle Widget
     @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,10 +117,15 @@ class _HomeScreenState extends State<HomeScreen> {
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
+
+// During loading, or if there is no data, a circular spinning progress indicator will show on the screen
             return CircularProgressIndicator();
           }
         },
       ),
+
+// Here I use the Bottom Navigation Bar Widget to toggle between the Home Screen and the ForecastDetails Screen
+// I also pass in the weather as a prop
      bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
         onTap: (index) {
@@ -140,11 +153,17 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
+
+// This is the code that builds the UI for the ForecastDetails Screen
 class ForecastDetailScreen extends StatelessWidget {
   final WeatherModel weather;
 
   const ForecastDetailScreen({Key? key, required this.weather}) : super(key: key);
 
+
+// This is where I use the Scaffold Widget to build the UI components of the app
+// I give it a title, I use the weather prop, and I begin centering and putting the data inside of columns using Text Widgets
+// I also add some styling using the TextStyle Widget
   @override
   Widget build(BuildContext context) {
     return Scaffold(
