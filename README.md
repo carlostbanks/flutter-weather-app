@@ -1,5 +1,14 @@
 # weather_application
 
+This Flutter project collects the current weather conditions for Miami, FL from the www.tomorrow.io API. 
+Information displayed is as follows:
+- Temperature in Celcius
+- Humidity
+- Dewpoint
+- Cloud Cover
+- UV Index
+- Wind Gusts
+
 A new Flutter project.
 
 ## Getting Started
